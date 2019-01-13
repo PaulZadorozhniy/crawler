@@ -1,19 +1,31 @@
 const fs = require('fs');
-const { JSDOM } = require('jsdom');
+const cheerio = require('cheerio');
 
 function getAttributesById(id, filePath) {
   const sampleFile = fs.readFileSync(filePath);
-  const dom = new JSDOM(sampleFile);
+  const $ = cheerio.load(sampleFile);
+  const element = $(`#${id}`)[0];
 
-  const button = dom.window.document.getElementById(id);
-  const array = Array.prototype.slice.apply(button.attributes);
+  return element ? element.attribs : undefined;
+}
 
-  return array.reduce((accumulator, attr) => {
-    accumulator[attr.name] = attr.value;
-    return accumulator;
-  }, {});
+function getElementsByAttr(attrs, filePath) {
+  const sampleFile = fs.readFileSync(filePath);
+  const $ = cheerio.load(sampleFile);
+  const elementAttribs = [];
+
+  Object.keys(attrs).forEach(key => {
+    const element = $(`[${key}='${attrs[key]}']`)[0];
+
+    if (element) {
+      elementAttribs.push(element);
+    }
+  });
+
+  return elementAttribs;
 }
 
 module.exports = {
   getAttributesById,
+  getElementsByAttr,
 };

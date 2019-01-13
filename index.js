@@ -3,7 +3,7 @@ const bunyan = require('bunyan');
 const logger = bunyan.createLogger({ name: 'my-crowler' });
 
 const cli = require('./helpers/cli');
-const { getAttributesById } = require('./helpers/dom');
+const { getAttributesById, getElementsByAttr } = require('./helpers/dom');
 
 const originalButtonId = 'make-everything-ok-button';
 
@@ -23,6 +23,9 @@ try {
       originalButtonAttributes
     )}`
   );
+
+  const elements = getElementsByAttr(originalButtonAttributes, anotherFilePath);
+  console.log(elements);
 } catch (err) {
   logger.error(err);
 }
