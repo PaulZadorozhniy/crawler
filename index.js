@@ -3,7 +3,7 @@ const bunyan = require('bunyan');
 const logger = bunyan.createLogger({ name: 'my-crowler' });
 
 const cli = require('./helpers/cli');
-const { getAttributesById, getElementsByAttr } = require('./helpers/dom');
+const { getAttributesById, getElementByAttr } = require('./helpers/dom');
 
 const originalButtonId = 'make-everything-ok-button';
 
@@ -24,8 +24,12 @@ try {
     )}`
   );
 
-  const elements = getElementsByAttr(originalButtonAttributes, anotherFilePath);
-  console.log(elements);
+  const elementPath = getElementByAttr(
+    originalButtonAttributes,
+    anotherFilePath
+  );
+
+  logger.info(`Successfully found similar button path: ${elementPath}`);
 } catch (err) {
   logger.error(err);
 }

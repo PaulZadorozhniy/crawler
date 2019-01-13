@@ -11,6 +11,7 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "cheerio": "^1.0.0-rc.2",
-    "jsdom": "^13.1.0"
+    "jsdom": "^13.1.0",
+    "string-similarity": "^3.0.0"
   }
 }

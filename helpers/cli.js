@@ -1,4 +1,4 @@
-const getArguments = () => {
+function getArguments() {
   const args = process.argv.slice(2);
   if (args.length !== 2) {
     throw new Error(
@@ -9,7 +9,7 @@ const getArguments = () => {
     originalFilePath: args[0],
     anotherFilePath: args[1],
   };
-};
+}
 
 module.exports = {
   getArguments,
